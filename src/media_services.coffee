@@ -20,19 +20,30 @@ MediaServices = {
         'Slideshare': new RegExp("https?://(?:www\\.)?slideshare\\.net/[\\w\\-]+/[\\w\\-]+", 'i')
         'Youtube': new RegExp("https?://(?:www\\.)?(?:youtube\\.com/watch\\?v=|youtu\\.be/)[\\w-]+/?", 'i')
     }
+    providers_cached: null
+    providers_cached_reg_exp: null
 
     getProviders: ->
-        providers = MediaServices.providers
+        if !MediaServices.providers_cached
+            providers = MediaServices.providers
 
-        reg_exps = []
-        for key, reg_exp of providers
-            reg_exps.push('(?:' + reg_exp.source.replace(/\\/g, '\\\\') + ')')
+            reg_exps = []
+            for key, reg_exp of providers
+                reg_exps.push('(?:' + reg_exp.source.replace(/\\/g, '\\\\') + ')')
 
-        return {
-            'pattern': reg_exps.join('|')
-            'providers': providers
-        }
+            MediaServices.providers_cached = {
+                'pattern': reg_exps.join('|')
+                'providers': providers
+            }
+        return MediaServices.providers_cached
 
+    getProvidersPattern: ->
+        if !MediaServices.providers_cached_reg_exp
+            reg_exps = []
+            for key, reg_exp of MediaServices.providers
+                reg_exps.push('(?:' + reg_exp.source + ')')
+            MediaServices.providers_cached_reg_exp = new RegExp(reg_exps.join('|'), 'ig')
+        return MediaServices.providers_cached_reg_exp
 
     # --- Imgly
     parseImgly: (cnt, callback) ->
