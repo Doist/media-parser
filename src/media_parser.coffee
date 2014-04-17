@@ -35,6 +35,6 @@ MediaParser = {
 
     extractURLs: (content) ->
         pattern = MediaServices.getProvidersPattern()
-        return content.match(pattern)
+        return content.match(pattern) or []
 
 }
