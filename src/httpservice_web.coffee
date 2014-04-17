@@ -46,8 +46,3 @@ class GWebHttpService
         script.setAttribute('src', onem_url)
         script.setAttribute('type', 'text/javascript')
         document.getElementsByTagName("head")[0].appendChild(script)
-
-try
-    window.WebHttpService = new GWebHttpService()
-catch e
-    null

@@ -22,24 +22,14 @@ MediaParser = {
         @services.push(MediaServices.parseYoutube)
         @services.push(MediaServices.parseSlideshare)
 
-    parse: (cnt, callback) ->
+    parse: (cnt, callback, timeout) ->
         if !MediaParser.http_service
             MediaParser.init()
 
         for service in MediaParser.services
-            has_match = service(cnt, callback)
+            has_match = service(cnt, callback, timeout)
             if has_match
                 return true
+
         callback(null)
 }
-
-# Export to global (node only)
-try
-    exports.MediaParser = MediaParser
-catch e
-    window.MediaParser = MediaParser
-
-try
-    exports.parse = MediaParser.parse
-catch e1
-    null

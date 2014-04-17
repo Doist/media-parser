@@ -1,0 +1,24 @@
+{
+    "name":         "media-parser",
+    "description":  "Simple JavaScript library to ease integration with media and oEmbed.",
+    "keywords":     ["oembed", "media", "thumbnails", "preview"],
+    "author":       "amix",
+    "version":      "1.0.0",
+    "dependencies": {},
+    "repository": "https://github.com/Doist/media-parser",
+    "licenses": [{
+        "type":       "MIT",
+        "url":        "http://opensource.org/licenses/mit-license.php"
+    }],
+
+    "engines": {
+        "node":       ">=0.2.0"
+    },
+
+    "directories": {
+        "lib" :       "./lib"
+    },
+
+    "main" :        "./lib/media-parser.js"
+
+}

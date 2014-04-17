@@ -1,4 +1,6 @@
-Simple JavaScript library to ease integration with media. Useful for obtaining direct links to media content and thumbnails.
+Simple JavaScript library to ease integration with media and oEmbed. 
+Useful for obtaining direct links to media content and thumbnails.
+Uses a combination of oEmbed APIs and custom APIs.
 
 ## Example from node
 
@@ -33,19 +35,19 @@ Simple JavaScript library to ease integration with media. Useful for obtaining d
 ## Supported services
 These services are supported:
 
-- deviantart.com
-- flickr.com
-- hulu.com
-- img.ly
-- instagr.am
-- justin.tv
-- rdio.com
-- screenr.com
-- slideshare.com
-- soundcloud.com
-- spotify.com
-- ted.com
-- twitpic.com
-- vimeo.com
-- yfrog.com
-- youtube.com
+- deviantart.com (oEmbed)
+- flickr.com (oEmbed)
+- hulu.com (oEmbed)
+- justin.tv (oEmbed)
+- rdio.com  (oEmbed)
+- screenr.com  (oEmbed)
+- slideshare.com (oEmbed)
+- soundcloud.com (oEmbed)
+- spotify.com (oEmbed)
+- ted.com (oEmbed)
+- vimeo.com (oEmbed)
+- youtube.com (oEmbed)
+- img.ly (custom)
+- instagr.am (custom)
+- twitpic.com (custom)
+- yfrog.com (custom)

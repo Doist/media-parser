@@ -62,10 +62,11 @@ MediaServices = {
             return true
 
     # --- Flickr
-    parseFlickr: (cnt, callback) ->
+    parseFlickr: (cnt, callback, timeout) ->
         match = cnt.match(/https?:\/\/(?:www\.)?(?:flic\.kr\/p|flickr.com\/photos)\/[^\s]+\/?/i)
         if match
             MediaTypes.oembedImageEntitiy(callback, {
+                'timeout': timeout
                 'media_type': 'image'
                 'sizes': {
                     't': 75,
@@ -81,69 +82,70 @@ MediaServices = {
             return true
 
     # --- Devaiant Art
-    parseDeviantArt: (cnt, callback) ->
+    parseDeviantArt: (cnt, callback, timeout) ->
         reg_exp = "https?://(?:www\\.)?" +
                   "(?:[\\w-]+\\.deviantart\\.com/(?:art/|[^/]+#/d)|fav\\.me/|sta\\.sh/)" +
                   "[\\w-]+/?"
         return MediaTypes.genericOemebed(cnt, callback,
                                          reg_exp,
                                          'https://backend.deviantart.com/oembed?url={0}&format=json',
-                                         'image')
+                                         'image', timeout)
 
 
     # --- Hulu
-    parseHulu: (cnt, callback) ->
+    parseHulu: (cnt, callback, timeout) ->
         return MediaTypes.genericOemebed(cnt, callback,
                                          "https?://(?:www\\.)?hulu\\.com/watch/[\\w\\-/]+",
                                          'http://www.hulu.com/api/oembed?url={0}&format=json',
-                                         'video')
+                                         'video', timeout)
 
     # --- Justin
-    parseJustin: (cnt, callback) ->
+    parseJustin: (cnt, callback, timeout) ->
         return MediaTypes.genericOemebed(cnt, callback,
                                          "https?://(?:www\\.)?justin\\.tv/[\\w\\-]+/?",
                                          'http://api.justin.tv/api/embed/from_url.json?url={0}',
-                                         'video')
+                                         'video', timeout)
 
     # --- Screenr
-    parseScreenr: (cnt, callback) ->
+    parseScreenr: (cnt, callback, timeout) ->
         return MediaTypes.genericOemebed(cnt, callback,
                                          "https?://(?:www\\.)?screenr\\.com/\\w+/?",
                                          "http://www.screenr.com/api/oembed.json?url={0}",
-                                         'video')
+                                         'video', timeout)
 
     # --- Rdio
-    parseRdio: (cnt, callback) ->
+    parseRdio: (cnt, callback, timeout) ->
         return MediaTypes.genericOemebed(cnt, callback,
                                          "https?://(?:www\\.)?rdio\\.com/artist/[\\w\\-/]+",
                                          "http://www.rdio.com/api/oembed/?url={0}&format=json",
-                                         'audio')
+                                         'audio', timeout)
     # --- Soundcloud
-    parseSoundCloud: (cnt, callback) ->
+    parseSoundCloud: (cnt, callback, timeout) ->
         return MediaTypes.genericOemebed(cnt, callback,
                                          "https?://(?:www\\.)?soundcloud\\.com/[\\w\\-/]+",
                                          "https://soundcloud.com/oembed?url={0}&format=json",
-                                         'audio')
+                                         'audio', timeout)
 
     # --- Spotify
-    parseSpotify: (cnt, callback) ->
+    parseSpotify: (cnt, callback, timeout) ->
         return MediaTypes.genericOemebed(cnt, callback,
                                          "https?://(?:www|open|play)\\.?spotify\\.com/(?:artist|track)/[\\w\\-/]+",
                                          "https://embed.spotify.com/oembed/?url={0}&format=json",
-                                         'audio')
+                                         'audio', timeout)
 
     # --- Ted
-    parseTed: (cnt, callback) ->
+    parseTed: (cnt, callback, timeout) ->
         return MediaTypes.genericOemebed(cnt, callback,
                                          "https?://(?:www\\.)?ted\\.com/talks/[\\w]+",
                                          "http://www.ted.com/talks/oembed.json?url={0}",
-                                         'video')
+                                         'video', timeout)
 
     # --- Vimeo
-    parseVimeo: (cnt, callback) ->
+    parseVimeo: (cnt, callback, timeout) ->
         match = cnt.match(new RegExp("https?://(?:www\\.)?vimeo\\.com/(?:album/\\w+/video/|groups/\\w+/videos/)?\\w+/?", 'i'))
         if match
             MediaTypes.oembedImageEntitiy(callback, {
+                'timeout': timeout
                 'media_type': 'video'
                 'sizes': {
                     '100': 100,
@@ -158,10 +160,11 @@ MediaServices = {
             return true
 
     # --- Slideshare
-    parseSlideshare: (cnt, callback) ->
+    parseSlideshare: (cnt, callback, timeout) ->
         match = cnt.match(new RegExp("https?://(?:www\\.)?slideshare\\.net/[\\w\\-]+/[\\w\\-]+", 'i'))
         if match
             MediaTypes.oembedImageEntitiy(callback, {
+                'timeout': timeout
                 'sizes': {
                     '3': 240,
                     '4': 576
@@ -175,11 +178,11 @@ MediaServices = {
             return true
 
     # --- Youtube
-    parseYoutube: (cnt, callback) ->
+    parseYoutube: (cnt, callback, timeout) ->
         return MediaTypes.genericOemebed(cnt, callback,
                                          "https?://(?:www\\.)?(?:youtube\\.com/watch\\?v=|youtu\\.be/)[\\w-]+/?",
                                          "http://www.youtube.com/oembed?url={0}&format=json",
-                                         'video')
+                                         'video', timeout)
 
 
 }

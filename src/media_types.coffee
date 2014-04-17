@@ -10,14 +10,15 @@ MediaTypes = {
                 if best_size
                     width = opts.sizes[best_size]
                     url = MediaParserUtils.format(opts.url_template, best_size, opts.match[1])
-                    return [url, width]
+                    return [url, width, width]
         })
 
-    genericOemebed: (cnt, callback, reg_exp, oembed_template, media_type) ->
+    genericOemebed: (cnt, callback, reg_exp, oembed_template, media_type, timeout) ->
         match = cnt.match(new RegExp(reg_exp, 'i'))
 
         if match
             MediaTypes.oembedImageEntitiy(callback, {
+                'timeout': timeout
                 'match': match
                 'oembed_template': oembed_template,
                 'media_type': media_type
@@ -30,7 +31,7 @@ MediaTypes = {
 
         cb_ok = (json) ->
             result = {
-                'content_url': content_url
+                'content_url': json.url or content_url
                 'get_thumbnail_url': (size) ->
                     # Custom
                     if opts.custom_thumbnail_url
@@ -45,22 +46,24 @@ MediaTypes = {
                     # Default
                     turl = json.thumbnail_url
                     twidth = json.thumbnail_width or 100
+                    theight = json.thumbnail_height or twidth
                     if turl
-                        return [turl.replace('http:', 'https:'), twidth]
+                        return [turl.replace('http:', 'https:'), twidth, theight]
             }
 
             if opts.sizes
-                result.sizes = opts.sizes
+                result.thumbnail_sizes = opts.sizes
 
             result.media_type = opts.media_type or 'other'
             result.title = json.title or ''
-            result.oemebed_result = json
+            result.raw = json
 
             callback(result)
 
         cb_error = (json) ->
             callback(null)
 
-        MediaParser.http_service.oembedRequest(req_url, cb_ok, cb_error, content_url)
+        MediaParser.http_service.oembedRequest(req_url, cb_ok, cb_error,
+                                               content_url, opts.timeout)
 
 }

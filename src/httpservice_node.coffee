@@ -1,8 +1,14 @@
 NodeHttpService = {
 
-    oembedRequest: (url, callback_ok, callback_error) ->
+    oembedRequest: (url, callback_ok, callback_error,
+                    content_url, timeout) ->
         request = require("request")
-        request(url, (error, response, body) ->
+
+        timeout = timeout or 5000
+
+        args = {"url": url, "timeout": timeout}
+
+        request(args, (error, response, body) ->
             if error
                 callback_error(error)
             else
@@ -11,8 +17,3 @@ NodeHttpService = {
         )
 
 }
-
-try
-    exports.NodeHttpService = NodeHttpService
-catch e
-    null
