@@ -215,7 +215,10 @@ MediaServices = {
                 'oembed_template': "http://www.slideshare.net/api/oembed/2?url={0}&format=json"
                 'custom_thumbnail_url': (turl, best_size, json) ->
                     turl = json.thumbnail
-                    return turl.replace(/thumbnail(?:-\d)?\.jpg/, "thumbnail-" + best_size + ".jpg")
+                    turl = turl.replace(/thumbnail(?:-\d)?\.jpg/, "thumbnail-" + best_size + ".jpg")
+                    if turl.indexOf('http') != 0
+                        turl = 'http:' + turl
+                    return turl
             })
             return true
 

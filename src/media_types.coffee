@@ -31,7 +31,6 @@ MediaTypes = {
 
         cb_ok = (json) ->
             result = {
-                'content_url': json.url or content_url
                 'get_thumbnail_url': (size) ->
                     # Custom
                     if opts.custom_thumbnail_url
@@ -51,6 +50,9 @@ MediaTypes = {
                         return [turl.replace('http:', 'https:'), twidth, theight]
             }
 
+            if json.url
+                result.content_url = json.url
+
             if opts.sizes
                 result.thumbnail_sizes = opts.sizes
 
@@ -58,7 +60,21 @@ MediaTypes = {
             result.title = json.title or ''
             result.raw = json
 
-            callback(result)
+            # Resolve content type
+            if result.content_url
+                cb_head = (head_res) ->
+                    if head_res
+                        content_type = head_res.headers and head_res.headers['content-type']
+
+                        if content_type
+                            result.content_type = content_type
+                        else
+                            result.content_type = 'application/octet-stream'
+
+                    callback(result)
+                MediaParser.http_service.headRequest(result.content_url, opts.timeout, cb_head)
+            else
+                callback(result)
 
         cb_error = (json) ->
             callback(null)
