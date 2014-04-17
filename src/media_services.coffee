@@ -1,8 +1,42 @@
 MediaServices = {
 
+    providers: {
+        'Imgly': /https?:\/\/(?:www\.)?img\.ly\/(\w+)\/?/i
+        'Instagram': /https?:\/\/(?:www\.)?(?:instagr\.am|instagram\.com)\/p\/([\w-]+)\/?/i
+        'Twitpic': /https?:\/\/(?:www\.)?twitpic\.com\/(\w+)\/?/i
+        'Yfrog': /https?:\/\/(?:www\.)?(?:\w+\.)?yfrog\.com\/(\w+)\/?/i
+        'Flickr': /https?:\/\/(?:www\.)?(?:flic\.kr\/p|flickr.com\/photos)\/[^\s]+\/?/i
+        'DevaiantArt': new RegExp("https?://(?:www\\.)?" +
+                       "(?:[\\w-]+\\.deviantart\\.com/(?:art/|[^/]+#/d)|fav\\.me/|sta\\.sh/)" +
+                       "[\\w-]+/?", 'i')
+        'Hulu': new RegExp("https?://(?:www\\.)?hulu\\.com/watch/[\\w\\-/]+", 'i')
+        'JustinTv': new RegExp("https?://(?:www\\.)?justin\\.tv/[\\w\\-]+/?", 'i')
+        'Screenr': new RegExp("https?://(?:www\\.)?screenr\\.com/\\w+/?", 'i')
+        'Rdio': new RegExp("https?://(?:www\\.)?rdio\\.com/artist/[\\w\\-/]+", 'i')
+        'Soundcloud': new RegExp("https?://(?:www\\.)?soundcloud\\.com/[\\w\\-/]+", 'i')
+        'Spotify': new RegExp("https?://(?:www|open|play)\\.?spotify\\.com/(?:artist|track)/[\\w\\-/]+", 'i')
+        'Ted': new RegExp("https?://(?:www\\.)?ted\\.com/talks/[\\w]+", 'i')
+        'Vimeo': new RegExp("https?://(?:www\\.)?vimeo\\.com/(?:album/\\w+/video/|groups/\\w+/videos/)?\\w+/?", 'i')
+        'Slideshare': new RegExp("https?://(?:www\\.)?slideshare\\.net/[\\w\\-]+/[\\w\\-]+", 'i')
+        'Youtube': new RegExp("https?://(?:www\\.)?(?:youtube\\.com/watch\\?v=|youtu\\.be/)[\\w-]+/?", 'i')
+    }
+
+    getProviders: ->
+        providers = MediaServices.providers
+
+        reg_exps = []
+        for key, reg_exp of providers
+            reg_exps.push('(?:' + reg_exp.source.replace(/\\/g, '\\\\') + ')')
+
+        return {
+            'pattern': reg_exps.join('|')
+            'providers': providers
+        }
+
+
     # --- Imgly
     parseImgly: (cnt, callback) ->
-        match = cnt.match(/https?:\/\/(?:www\.)?img\.ly\/(\w+)\/?/i)
+        match = cnt.match(MediaServices.providers.Imgly)
         if match
             MediaTypes.imageEntity(callback, {
                 'sizes': {
@@ -19,7 +53,7 @@ MediaServices = {
 
     # --- Instagram
     parseInstagram: (cnt, callback) ->
-        match = cnt.match(/https?:\/\/(?:www\.)?(?:instagr\.am|instagram\.com)\/p\/([\w-]+)\/?/i)
+        match = cnt.match(MediaServices.providers.Instagram)
         if match
             MediaTypes.imageEntity(callback, {
                 'sizes': {
@@ -34,7 +68,7 @@ MediaServices = {
 
     # --- Twitpic
     parseTwitpic: (cnt, callback) ->
-        match = cnt.match(/https?:\/\/(?:www\.)?twitpic\.com\/(\w+)\/?/i)
+        match = cnt.match(MediaServices.providers.Twitpic)
         if match
             MediaTypes.imageEntity(callback, {
                 'sizes': {
@@ -49,7 +83,7 @@ MediaServices = {
 
     # --- Yfrog
     parseYfrog: (cnt, callback) ->
-        match = cnt.match(/https?:\/\/(?:www\.)?(?:\w+\.)?yfrog\.com\/(\w+)\/?/i)
+        match = cnt.match(MediaServices.providers.Yfrog)
         if match
             MediaTypes.imageEntity(callback, {
                 'sizes': {
@@ -63,7 +97,7 @@ MediaServices = {
 
     # --- Flickr
     parseFlickr: (cnt, callback, timeout) ->
-        match = cnt.match(/https?:\/\/(?:www\.)?(?:flic\.kr\/p|flickr.com\/photos)\/[^\s]+\/?/i)
+        match = cnt.match(MediaServices.providers.Flickr)
         if match
             MediaTypes.oembedImageEntitiy(callback, {
                 'timeout': timeout
@@ -83,11 +117,8 @@ MediaServices = {
 
     # --- Devaiant Art
     parseDeviantArt: (cnt, callback, timeout) ->
-        reg_exp = "https?://(?:www\\.)?" +
-                  "(?:[\\w-]+\\.deviantart\\.com/(?:art/|[^/]+#/d)|fav\\.me/|sta\\.sh/)" +
-                  "[\\w-]+/?"
         return MediaTypes.genericOemebed(cnt, callback,
-                                         reg_exp,
+                                         MediaServices.providers.DevaiantArt,
                                          'https://backend.deviantart.com/oembed?url={0}&format=json',
                                          'image', timeout)
 
@@ -95,54 +126,54 @@ MediaServices = {
     # --- Hulu
     parseHulu: (cnt, callback, timeout) ->
         return MediaTypes.genericOemebed(cnt, callback,
-                                         "https?://(?:www\\.)?hulu\\.com/watch/[\\w\\-/]+",
+                                         MediaServices.providers.Hulu,
                                          'http://www.hulu.com/api/oembed?url={0}&format=json',
                                          'video', timeout)
 
     # --- Justin
     parseJustin: (cnt, callback, timeout) ->
         return MediaTypes.genericOemebed(cnt, callback,
-                                         "https?://(?:www\\.)?justin\\.tv/[\\w\\-]+/?",
+                                         MediaServices.providers.JustinTv,
                                          'http://api.justin.tv/api/embed/from_url.json?url={0}',
                                          'video', timeout)
 
     # --- Screenr
     parseScreenr: (cnt, callback, timeout) ->
         return MediaTypes.genericOemebed(cnt, callback,
-                                         "https?://(?:www\\.)?screenr\\.com/\\w+/?",
+                                         MediaServices.providers.Screenr,
                                          "http://www.screenr.com/api/oembed.json?url={0}",
                                          'video', timeout)
 
     # --- Rdio
     parseRdio: (cnt, callback, timeout) ->
         return MediaTypes.genericOemebed(cnt, callback,
-                                         "https?://(?:www\\.)?rdio\\.com/artist/[\\w\\-/]+",
+                                         MediaServices.providers.Rdio,
                                          "http://www.rdio.com/api/oembed/?url={0}&format=json",
                                          'audio', timeout)
     # --- Soundcloud
     parseSoundCloud: (cnt, callback, timeout) ->
         return MediaTypes.genericOemebed(cnt, callback,
-                                         "https?://(?:www\\.)?soundcloud\\.com/[\\w\\-/]+",
+                                         MediaServices.providers.Soundcloud,
                                          "https://soundcloud.com/oembed?url={0}&format=json",
                                          'audio', timeout)
 
     # --- Spotify
     parseSpotify: (cnt, callback, timeout) ->
         return MediaTypes.genericOemebed(cnt, callback,
-                                         "https?://(?:www|open|play)\\.?spotify\\.com/(?:artist|track)/[\\w\\-/]+",
+                                         MediaServices.providers.Spotify,
                                          "https://embed.spotify.com/oembed/?url={0}&format=json",
                                          'audio', timeout)
 
     # --- Ted
     parseTed: (cnt, callback, timeout) ->
         return MediaTypes.genericOemebed(cnt, callback,
-                                         "https?://(?:www\\.)?ted\\.com/talks/[\\w]+",
+                                         MediaServices.providers.Ted,
                                          "http://www.ted.com/talks/oembed.json?url={0}",
                                          'video', timeout)
 
     # --- Vimeo
     parseVimeo: (cnt, callback, timeout) ->
-        match = cnt.match(new RegExp("https?://(?:www\\.)?vimeo\\.com/(?:album/\\w+/video/|groups/\\w+/videos/)?\\w+/?", 'i'))
+        match = cnt.match(MediaServices.providers.Vimeo)
         if match
             MediaTypes.oembedImageEntitiy(callback, {
                 'timeout': timeout
@@ -161,7 +192,7 @@ MediaServices = {
 
     # --- Slideshare
     parseSlideshare: (cnt, callback, timeout) ->
-        match = cnt.match(new RegExp("https?://(?:www\\.)?slideshare\\.net/[\\w\\-]+/[\\w\\-]+", 'i'))
+        match = cnt.match(MediaServices.providers.Slideshare)
         if match
             MediaTypes.oembedImageEntitiy(callback, {
                 'timeout': timeout
@@ -180,7 +211,7 @@ MediaServices = {
     # --- Youtube
     parseYoutube: (cnt, callback, timeout) ->
         return MediaTypes.genericOemebed(cnt, callback,
-                                         "https?://(?:www\\.)?(?:youtube\\.com/watch\\?v=|youtu\\.be/)[\\w-]+/?",
+                                         MediaServices.providers.Youtube,
                                          "http://www.youtube.com/oembed?url={0}&format=json",
                                          'video', timeout)
 

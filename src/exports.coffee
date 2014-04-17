@@ -9,6 +9,11 @@ catch e
     window.MediaParser = MediaParser
 
 try
+    exports.MediaServices = MediaServices
+catch e
+    window.MediaServices = MediaServices
+
+try
     exports.parse = MediaParser.parse
 catch e1
     null

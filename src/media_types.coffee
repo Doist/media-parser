@@ -14,7 +14,7 @@ MediaTypes = {
         })
 
     genericOemebed: (cnt, callback, reg_exp, oembed_template, media_type, timeout) ->
-        match = cnt.match(new RegExp(reg_exp, 'i'))
+        match = cnt.match(reg_exp)
 
         if match
             MediaTypes.oembedImageEntitiy(callback, {
