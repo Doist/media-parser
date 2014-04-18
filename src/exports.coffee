@@ -1,25 +1,12 @@
 try
-    window.WebHttpService = new GWebHttpService()
-catch e
-    null
-
-try
-    exports.MediaParser = MediaParser
-catch e
-    window.MediaParser = MediaParser
-
-try
-    exports.MediaServices = MediaServices
-catch e
-    window.MediaServices = MediaServices
-
-try
+    exports.init = MediaParser.init
     exports.parse = MediaParser.parse
+    exports.extractURLs = MediaParser.extractURLs
 catch e1
     null
 
 try
-    exports.NodeHttpService = NodeHttpService
-catch e
+    exports.getProviders = MediaServices.getProviders
+    exports.getProvidersPattern = MediaServices.getProvidersPattern
+catch e2
     null
-
