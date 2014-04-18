@@ -1,9 +1,8 @@
 var config = module.exports;
 
-config["i18n tests"] = {
+config["tests"] = {
     environment: "node",
-    extensions: [require("buster-coffee")],
     tests: [
-        "tests/test_*.coffee"
+        "tests/test_*.js"
     ]
 };

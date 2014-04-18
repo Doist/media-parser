@@ -2,7 +2,6 @@ MediaTypes = {
 
     imageEntity: (callback, opts) ->
         return callback({
-            'media_type': 'image'
             'sizes': opts.sizes
             'content_url': opts.match[0]
             'get_thumbnail_url': (size) ->
@@ -13,15 +12,14 @@ MediaTypes = {
                     return [url, width, width]
         })
 
-    genericOemebed: (cnt, callback, reg_exp, oembed_template, media_type, timeout) ->
+    genericOemebed: (cnt, callback, reg_exp, oembed_template, timeout) ->
         match = cnt.match(reg_exp)
 
         if match
             MediaTypes.oembedImageEntitiy(callback, {
                 'timeout': timeout
                 'match': match
-                'oembed_template': oembed_template,
-                'media_type': media_type
+                'oembed_template': oembed_template
             })
             return true
 
@@ -56,7 +54,6 @@ MediaTypes = {
             if opts.sizes
                 result.thumbnail_sizes = opts.sizes
 
-            result.media_type = opts.media_type or 'other'
             result.title = json.title or ''
             result.raw = json
 

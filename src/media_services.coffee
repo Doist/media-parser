@@ -112,7 +112,6 @@ MediaServices = {
         if match
             MediaTypes.oembedImageEntitiy(callback, {
                 'timeout': timeout
-                'media_type': 'image'
                 'sizes': {
                     't': 75,
                     'm': 150,
@@ -131,7 +130,7 @@ MediaServices = {
         return MediaTypes.genericOemebed(cnt, callback,
                                          MediaServices.providers.DevaiantArt,
                                          'https://backend.deviantart.com/oembed?url={0}&format=json',
-                                         'image', timeout)
+                                         timeout)
 
 
     # --- Hulu
@@ -139,48 +138,48 @@ MediaServices = {
         return MediaTypes.genericOemebed(cnt, callback,
                                          MediaServices.providers.Hulu,
                                          'http://www.hulu.com/api/oembed?url={0}&format=json',
-                                         'video', timeout)
+                                         timeout)
 
     # --- Justin
     parseJustin: (cnt, callback, timeout) ->
         return MediaTypes.genericOemebed(cnt, callback,
                                          MediaServices.providers.JustinTv,
                                          'http://api.justin.tv/api/embed/from_url.json?url={0}',
-                                         'video', timeout)
+                                         timeout)
 
     # --- Screenr
     parseScreenr: (cnt, callback, timeout) ->
         return MediaTypes.genericOemebed(cnt, callback,
                                          MediaServices.providers.Screenr,
                                          "http://www.screenr.com/api/oembed.json?url={0}",
-                                         'video', timeout)
+                                         timeout)
 
     # --- Rdio
     parseRdio: (cnt, callback, timeout) ->
         return MediaTypes.genericOemebed(cnt, callback,
                                          MediaServices.providers.Rdio,
                                          "http://www.rdio.com/api/oembed/?url={0}&format=json",
-                                         'audio', timeout)
+                                         timeout)
     # --- Soundcloud
     parseSoundCloud: (cnt, callback, timeout) ->
         return MediaTypes.genericOemebed(cnt, callback,
                                          MediaServices.providers.Soundcloud,
                                          "https://soundcloud.com/oembed?url={0}&format=json",
-                                         'audio', timeout)
+                                         timeout)
 
     # --- Spotify
     parseSpotify: (cnt, callback, timeout) ->
         return MediaTypes.genericOemebed(cnt, callback,
                                          MediaServices.providers.Spotify,
                                          "https://embed.spotify.com/oembed/?url={0}&format=json",
-                                         'audio', timeout)
+                                         timeout)
 
     # --- Ted
     parseTed: (cnt, callback, timeout) ->
         return MediaTypes.genericOemebed(cnt, callback,
                                          MediaServices.providers.Ted,
                                          "http://www.ted.com/talks/oembed.json?url={0}",
-                                         'video', timeout)
+                                         timeout)
 
     # --- Vimeo
     parseVimeo: (cnt, callback, timeout) ->
@@ -188,7 +187,6 @@ MediaServices = {
         if match
             MediaTypes.oembedImageEntitiy(callback, {
                 'timeout': timeout
-                'media_type': 'video'
                 'sizes': {
                     '100': 100,
                     '200': 200,
@@ -227,7 +225,7 @@ MediaServices = {
         return MediaTypes.genericOemebed(cnt, callback,
                                          MediaServices.providers.Youtube,
                                          "http://www.youtube.com/oembed?url={0}&format=json",
-                                         'video', timeout)
+                                         timeout)
 
 
 }

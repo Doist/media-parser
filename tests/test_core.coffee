@@ -1,7 +1,6 @@
-# -*- coding: utf-8 -*-
 buster = require 'buster'
 
-media_parser = require "../build/media_parser.js"
+media_parser = require "../lib/media-parser.js"
 
 
 buster.testCase "basic",
