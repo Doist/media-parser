@@ -76,7 +76,7 @@ These services are supported:
 
 Related
 =======
-* (TodoistMediaParser)[https://github.com/Doist/TodoistMediaParser] - similar version done in Java
+* [TodoistMediaParser](https://github.com/Doist/TodoistMediaParser) - similar version done in Java
 
 
 Authors
