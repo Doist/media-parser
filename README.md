@@ -52,6 +52,23 @@ media_parser.getProviders()
 // Return a pattern that can match supported services:
 media_parser.getProvidersPattern()
 ```
+
+## Running tests
+
+Requires [buster](https://www.npmjs.org/package/buster):
+
+    sh compile.sh; buster-test
+
+
+## Adding a new service
+
+It should be quite trivial to add a new service:
+
+1) Add a new handler in `src/media_services.coffee`
+2) Add the handler to `src/media_parser.coffee`
+3) Add a test suite in `tests/test_core.coffee`
+4) Test using `sh compile.sh; buster-test`
+
     
 ## Supported services
 These services are supported:
