@@ -64,10 +64,10 @@ Requires [buster](https://www.npmjs.org/package/buster):
 
 It should be quite trivial to add a new service:
 
-1) Add a new handler in `src/media_services.coffee`
-2) Add the handler to `src/media_parser.coffee`
-3) Add a test suite in `tests/test_core.coffee`
-4) Test using `sh compile.sh; buster-test`
+* Add a new handler in `src/media_services.coffee`
+* Add the handler to `src/media_parser.coffee`
+* Add a test suite in `tests/test_core.coffee`
+* Test using `sh compile.sh; buster-test`
 
     
 ## Supported services
