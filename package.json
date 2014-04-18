@@ -3,7 +3,7 @@
     "description":  "Simple JavaScript library to ease integration with media and oEmbed.",
     "keywords":     ["oembed", "media", "thumbnails", "preview"],
     "author":       "amix",
-    "version":      "1.3.0",
+    "version":      "1.3.5",
     "dependencies": {},
     "repository": "https://github.com/Doist/media-parser",
     "licenses": [{
