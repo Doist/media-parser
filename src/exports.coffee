@@ -2,6 +2,7 @@ try
     exports.init = MediaParser.init
     exports.parse = MediaParser.parse
     exports.extractURLs = MediaParser.extractURLs
+    exports.allURLs = MediaParser.allURLs
 catch e1
     null
 
