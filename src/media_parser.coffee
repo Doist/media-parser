@@ -37,4 +37,8 @@ MediaParser = {
         pattern = MediaServices.getProvidersPattern()
         return content.match(pattern) or []
 
+    url_pattern: /https?:\/\/[^\s]+/gi
+    allURLs: (content) ->
+        return content.match(MediaParser.url_pattern) or []
+
 }
