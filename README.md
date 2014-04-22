@@ -35,6 +35,19 @@ media_parser.parse('This is a test http://www.youtube.com/watch?v=9bZkp7q19f0', 
 }
 ```
 
+## Result description
+```js
+// Example
+{
+    "title": "...",
+    "underlying_type": ... can be: [page, image, video, audio] ,
+    "content_url": ... direct link to the content (only for some),
+    "content_type": ... MIME type of content_url,
+    "raw": ... raw oEmbed response (only for oEmbed resources),
+    "get_thumbnail_url": function(min_size) { ... returns thumbnail }
+}
+```
+
 
 ## Other useful functions
 
