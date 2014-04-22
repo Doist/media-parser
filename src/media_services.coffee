@@ -50,6 +50,7 @@ MediaServices = {
         match = cnt.match(MediaServices.providers.Imgly)
         if match
             MediaTypes.imageEntity(callback, {
+                'underlying_type': 'image'
                 'sizes': {
                     'thumb': 50,
                     'mini': 75,
@@ -67,6 +68,7 @@ MediaServices = {
         match = cnt.match(MediaServices.providers.Instagram)
         if match
             MediaTypes.imageEntity(callback, {
+                'underlying_type': 'image'
                 'sizes': {
                     't': 150,
                     'm': 306,
@@ -82,6 +84,7 @@ MediaServices = {
         match = cnt.match(MediaServices.providers.Twitpic)
         if match
             MediaTypes.imageEntity(callback, {
+                'underlying_type': 'image'
                 'sizes': {
                     'mini': 75,
                     'thumb': 50,
@@ -97,6 +100,7 @@ MediaServices = {
         match = cnt.match(MediaServices.providers.Yfrog)
         if match
             MediaTypes.imageEntity(callback, {
+                'underlying_type': 'image'
                 'sizes': {
                     'small': 100,
                     'medium': 640
@@ -111,6 +115,7 @@ MediaServices = {
         match = cnt.match(MediaServices.providers.Flickr)
         if match
             MediaTypes.oembedImageEntitiy(callback, {
+                'underlying_type': 'image'
                 'timeout': timeout
                 'sizes': {
                     't': 75,
@@ -130,7 +135,7 @@ MediaServices = {
         return MediaTypes.genericOemebed(cnt, callback,
                                          MediaServices.providers.DevaiantArt,
                                          'https://backend.deviantart.com/oembed?url={0}&format=json',
-                                         timeout)
+                                         timeout, 'image')
 
 
     # --- Hulu
@@ -138,54 +143,55 @@ MediaServices = {
         return MediaTypes.genericOemebed(cnt, callback,
                                          MediaServices.providers.Hulu,
                                          'http://www.hulu.com/api/oembed?url={0}&format=json',
-                                         timeout)
+                                         timeout, 'video')
 
     # --- Justin
     parseJustin: (cnt, callback, timeout) ->
         return MediaTypes.genericOemebed(cnt, callback,
                                          MediaServices.providers.JustinTv,
                                          'http://api.justin.tv/api/embed/from_url.json?url={0}',
-                                         timeout)
+                                         timeout, 'video')
 
     # --- Screenr
     parseScreenr: (cnt, callback, timeout) ->
         return MediaTypes.genericOemebed(cnt, callback,
                                          MediaServices.providers.Screenr,
                                          "http://www.screenr.com/api/oembed.json?url={0}",
-                                         timeout)
+                                         timeout, 'video')
 
     # --- Rdio
     parseRdio: (cnt, callback, timeout) ->
         return MediaTypes.genericOemebed(cnt, callback,
                                          MediaServices.providers.Rdio,
                                          "http://www.rdio.com/api/oembed/?url={0}&format=json",
-                                         timeout)
+                                         timeout, 'audio')
     # --- Soundcloud
     parseSoundCloud: (cnt, callback, timeout) ->
         return MediaTypes.genericOemebed(cnt, callback,
                                          MediaServices.providers.Soundcloud,
                                          "https://soundcloud.com/oembed?url={0}&format=json",
-                                         timeout)
+                                         timeout, 'audio')
 
     # --- Spotify
     parseSpotify: (cnt, callback, timeout) ->
         return MediaTypes.genericOemebed(cnt, callback,
                                          MediaServices.providers.Spotify,
                                          "https://embed.spotify.com/oembed/?url={0}&format=json",
-                                         timeout)
+                                         timeout, 'audio')
 
     # --- Ted
     parseTed: (cnt, callback, timeout) ->
         return MediaTypes.genericOemebed(cnt, callback,
                                          MediaServices.providers.Ted,
                                          "http://www.ted.com/talks/oembed.json?url={0}",
-                                         timeout)
+                                         timeout, 'video')
 
     # --- Vimeo
     parseVimeo: (cnt, callback, timeout) ->
         match = cnt.match(MediaServices.providers.Vimeo)
         if match
             MediaTypes.oembedImageEntitiy(callback, {
+                'underlying_type': 'video'
                 'timeout': timeout
                 'sizes': {
                     '100': 100,
@@ -204,6 +210,7 @@ MediaServices = {
         match = cnt.match(MediaServices.providers.Slideshare)
         if match
             MediaTypes.oembedImageEntitiy(callback, {
+                'underlying_type': 'page'
                 'timeout': timeout
                 'sizes': {
                     '3': 240,
@@ -225,7 +232,6 @@ MediaServices = {
         return MediaTypes.genericOemebed(cnt, callback,
                                          MediaServices.providers.Youtube,
                                          "http://www.youtube.com/oembed?url={0}&format=json",
-                                         timeout)
-
+                                         timeout, 'video')
 
 }

@@ -6,33 +6,30 @@ buster = require('buster');
 media_parser = require("../lib/media-parser.js");
 
 buster.testCase("basic", {
-  'setUp': function() {
-    return media_parser.MediaParser.init({});
-  },
   'img.ly': function() {
     var result;
-    result = media_parser.MediaParser.parse('This http://img.ly/yAqP Test', function(obj) {
+    result = media_parser.parse('This http://img.ly/yAqP Test', function(obj) {
       return buster.assert.equals(obj.get_thumbnail_url(55)[1], 75);
     });
     return buster.assert.equals(result, true);
   },
   'instagram': function() {
     var result;
-    result = media_parser.MediaParser.parse('This http://instagram.com/p/mu9zN9KjJL/ Test', function(obj) {
+    result = media_parser.parse('This http://instagram.com/p/mu9zN9KjJL/ Test', function(obj) {
       return buster.assert.equals(obj.get_thumbnail_url(55)[1], 150);
     });
     return buster.assert.equals(result, true);
   },
   'twitpic': function() {
     var result;
-    result = media_parser.MediaParser.parse('This http://twitpic.com/1vm850 Test', function(obj) {
+    result = media_parser.parse('This http://twitpic.com/1vm850 Test', function(obj) {
       return buster.assert.equals(obj.get_thumbnail_url(55)[1], 75);
     });
     return buster.assert.equals(result, true);
   },
   'yfrog': function() {
     var result;
-    result = media_parser.MediaParser.parse('This http://yfrog.com/jukynnj Test', function(obj) {
+    result = media_parser.parse('This http://yfrog.com/jukynnj Test', function(obj) {
       return buster.assert.equals(obj.get_thumbnail_url(55)[1], 100);
     });
     return buster.assert.equals(result, true);
@@ -40,90 +37,87 @@ buster.testCase("basic", {
 });
 
 buster.testCase("oembed_images", {
-  'setUp': function() {
-    return media_parser.MediaParser.init(media_parser.NodeHttpService);
-  },
   'flickr': function() {
     var result;
-    result = media_parser.MediaParser.parse('This https://www.flickr.com/photos/muzuto/10624912815/ Test', function(obj) {
+    result = media_parser.parse('This https://www.flickr.com/photos/muzuto/10624912815/ Test', function(obj) {
       return buster.assert.equals(obj.get_thumbnail_url(55)[1], 75);
     });
     buster.assert.equals(result, true);
-    result = media_parser.MediaParser.parse('This http://flic.kr/p/hTVoH1 Test', function(obj) {
+    result = media_parser.parse('This http://flic.kr/p/hTVoH1 Test', function(obj) {
       return buster.assert.equals(obj.get_thumbnail_url(400)[1], 550);
     });
     return buster.assert.equals(result, true);
   },
   'deviant_art': function() {
     var result;
-    result = media_parser.MediaParser.parse('This http://www.deviantart.com/art/Growing-Bird-441918288 Test', function(obj) {
+    result = media_parser.parse('This http://www.deviantart.com/art/Growing-Bird-441918288 Test', function(obj) {
       return buster.assert.equals(obj.get_thumbnail_url(55)[1], 150);
     });
     buster.assert.equals(result, true);
-    result = media_parser.MediaParser.parse('This http://fav.me/d4klbrc Test', function(obj) {
+    result = media_parser.parse('This http://fav.me/d4klbrc Test', function(obj) {
       return buster.assert.equals(obj.get_thumbnail_url(55)[1], 300);
     });
     return buster.assert.equals(result, true);
   },
   'hulu': function() {
     var result;
-    result = media_parser.MediaParser.parse('This http://www.hulu.com/watch/609104 Test', function(obj) {
+    result = media_parser.parse('This http://www.hulu.com/watch/609104 Test', function(obj) {
       return buster.assert.equals(obj.get_thumbnail_url(55)[1], 145);
     });
     return buster.assert.equals(result, true);
   },
   'justin': function() {
     var result;
-    result = media_parser.MediaParser.parse('This http://www.justin.tv/deepellumonair Test', function(obj) {
+    result = media_parser.parse('This http://www.justin.tv/deepellumonair Test', function(obj) {
       return buster.assert.equals(obj.get_thumbnail_url(55)[1], 150);
     });
     return buster.assert.equals(result, true);
   },
   'screenr': function() {
     var result;
-    result = media_parser.MediaParser.parse('This http://www.screenr.com/NTHH Test', function(obj) {
+    result = media_parser.parse('This http://www.screenr.com/NTHH Test', function(obj) {
       return buster.assert.equals(obj.get_thumbnail_url(55)[1], 100);
     });
     return buster.assert.equals(result, true);
   },
   'rdio': function() {
     var result;
-    result = media_parser.MediaParser.parse('This http://www.rdio.com/artist/The_Black_Keys/album/Brothers/ Test', function(obj) {
+    result = media_parser.parse('This http://www.rdio.com/artist/The_Black_Keys/album/Brothers/ Test', function(obj) {
       return buster.assert.equals(obj.get_thumbnail_url(55)[1], 200);
     });
     return buster.assert.equals(result, true);
   },
   'slideshare': function() {
     var result;
-    result = media_parser.MediaParser.parse('This http://www.slideshare.net/goncalossilva/ruby-an-introduction Test', function(obj) {
+    result = media_parser.parse('This http://www.slideshare.net/goncalossilva/ruby-an-introduction Test', function(obj) {
       return buster.assert.equals(obj.get_thumbnail_url(55)[1], 240);
     });
     return buster.assert.equals(result, true);
   },
   'soundcloud': function() {
     var result;
-    result = media_parser.MediaParser.parse('This https://soundcloud.com/sizzlebird Test', function(obj) {
+    result = media_parser.parse('This https://soundcloud.com/sizzlebird Test', function(obj) {
       return buster.assert.equals(obj.get_thumbnail_url(55)[1], 100);
     });
     return buster.assert.equals(result, true);
   },
   'ted': function() {
     var result;
-    result = media_parser.MediaParser.parse('This http://www.ted.com/talks/ken_robinson_says_schools_kill_creativity Test', function(obj) {
+    result = media_parser.parse('This http://www.ted.com/talks/ken_robinson_says_schools_kill_creativity Test', function(obj) {
       return buster.assert.equals(obj.get_thumbnail_url(55)[1], 480);
     });
     return buster.assert.equals(result, true);
   },
   'vimeo': function() {
     var result;
-    result = media_parser.MediaParser.parse('This http://vimeo.com/album/2642665/video/74622970 Test', function(obj) {
+    result = media_parser.parse('This http://vimeo.com/album/2642665/video/74622970 Test', function(obj) {
       return buster.assert.equals(obj.get_thumbnail_url(55)[1], 100);
     });
     return buster.assert.equals(result, true);
   },
   'youtube': function() {
     var result;
-    result = media_parser.MediaParser.parse('This http://www.youtube.com/watch?v=9bZkp7q19f0 Test', function(obj) {
+    result = media_parser.parse('This http://www.youtube.com/watch?v=9bZkp7q19f0 Test', function(obj) {
       return buster.assert.equals(obj.get_thumbnail_url(55)[1], 480);
     });
     return buster.assert.equals(result, true);
