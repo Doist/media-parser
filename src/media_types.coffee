@@ -39,8 +39,8 @@ MediaTypes = {
                             width = opts.sizes[best_size]
                             turl = json.thumbnail_url
                             custom_turl = opts.custom_thumbnail_url(turl, best_size, json)
-                            if custom_turl
-                                return [custom_turl.replace('http:', 'https:'), width]
+                            custom_turl[0] = custom_turl[0].replace('http:', 'https:')
+                            return custom_turl
 
                     # Default
                     turl = json.thumbnail_url

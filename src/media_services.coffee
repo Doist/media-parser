@@ -100,7 +100,6 @@ MediaServices = {
         match = cnt.match(MediaServices.providers.Yfrog)
         if match
             MediaTypes.imageEntity(callback, {
-                'underlying_type': 'image'
                 'sizes': {
                     'small': 100,
                     'medium': 640
@@ -140,10 +139,24 @@ MediaServices = {
 
     # --- Hulu
     parseHulu: (cnt, callback, timeout) ->
-        return MediaTypes.genericOemebed(cnt, callback,
-                                         MediaServices.providers.Hulu,
-                                         'http://www.hulu.com/api/oembed?url={0}&format=json',
-                                         timeout, 'video')
+        match = cnt.match(MediaServices.providers.Hulu)
+        if match
+            MediaTypes.oembedImageEntitiy(callback, {
+                'underlying_type': 'video'
+                'timeout': timeout
+                'sizes': {
+                    'r': 145,
+                    'l': 512
+                }
+                'match': match
+                'oembed_template': 'http://www.hulu.com/api/oembed?url={0}&format=json'
+                'custom_thumbnail_url': (turl, best_size, json) ->
+                    if best_size == 'r'
+                        return [json.thumbnail_url, json.thumbnail_width, json.thumbnail_height]
+                    else
+                        return [json.large_thumbnail_url, json.large_thumbnail_width, json.large_thumbnail_height]
+            })
+            return true
 
     # --- Justin
     parseJustin: (cnt, callback, timeout) ->
@@ -201,7 +214,8 @@ MediaServices = {
                 'match': match
                 'oembed_template': "http://vimeo.com/api/oembed.json?url={0}"
                 'custom_thumbnail_url': (turl, best_size) ->
-                    return turl.replace(/_\d+\.jpg$/i, "_" + best_size + ".jpg")
+                    size = parseInt(best_size)
+                    return [turl.replace(/_\d+\.jpg$/i, "_" + best_size + ".jpg"), size, size]
             })
             return true
 
@@ -223,7 +237,11 @@ MediaServices = {
                     turl = turl.replace(/thumbnail(?:-\d)?\.jpg/, "thumbnail-" + best_size + ".jpg")
                     if turl.indexOf('http') != 0
                         turl = 'http:' + turl
-                    return turl
+                    if best_size == '3'
+                        size = 240
+                    else
+                        size = 576
+                    return [turl, size, size]
             })
             return true
 
