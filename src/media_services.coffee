@@ -1,24 +1,24 @@
 MediaServices = {
 
     providers: {
-        'Imgly': /https?:\/\/(?:www\.)?img\.ly\/(\w+)\/?/i
-        'Instagram': /https?:\/\/(?:www\.)?(?:instagr\.am|instagram\.com)\/p\/([\w-]+)\/?/i
-        'Twitpic': /https?:\/\/(?:www\.)?twitpic\.com\/(\w+)\/?/i
-        'Yfrog': /https?:\/\/(?:www\.)?(?:\w+\.)?yfrog\.com\/(\w+)\/?/i
-        'Flickr': /https?:\/\/(?:www\.)?(?:flic\.kr\/p|flickr.com\/photos)\/[^\s]+\/?/i
+        'Imgly': /https?:\/\/(?:www\.)?img\.ly\/(\w+)/i
+        'Instagram': /https?:\/\/(?:www\.)?(?:instagr\.am|instagram\.com)\/p\/([\w-]+)/i
+        'Twitpic': /https?:\/\/(?:www\.)?twitpic\.com\/(\w+)/i
+        'Yfrog': /https?:\/\/(?:www\.)?(?:\w+\.)?yfrog\.com\/(\w+)/i
+        'Flickr': /https?:\/\/(?:www\.)?(?:flic\.kr\/p|flickr.com\/photos)\/[^\s]+/i
         'DevaiantArt': new RegExp("https?://(?:www\\.)?" +
                        "(?:[\\w-]+\\.deviantart\\.com/(?:art/|[^/]+#/d)|fav\\.me/|sta\\.sh/)" +
-                       "[\\w-]+/?", 'i')
+                       "[\\w-]+", 'i')
         'Hulu': new RegExp("https?://(?:www\\.)?hulu\\.com/watch/[\\w\\-/]+", 'i')
-        'JustinTv': new RegExp("https?://(?:www\\.)?justin\\.tv/[\\w\\-]+/?", 'i')
-        'Screenr': new RegExp("https?://(?:www\\.)?screenr\\.com/\\w+/?", 'i')
+        'JustinTv': new RegExp("https?://(?:www\\.)?justin\\.tv/[\\w\\-]+", 'i')
+        'Screenr': new RegExp("https?://(?:www\\.)?screenr\\.com/\\w+", 'i')
         'Rdio': new RegExp("https?://(?:www\\.)?rdio\\.com/artist/[\\w\\-/]+", 'i')
         'Soundcloud': new RegExp("https?://(?:www\\.)?soundcloud\\.com/[\\w\\-/]+", 'i')
         'Spotify': new RegExp("https?://(?:www|open|play)\\.?spotify\\.com/(?:artist|track)/[\\w\\-/]+", 'i')
         'Ted': new RegExp("https?://(?:www\\.)?ted\\.com/talks/[\\w]+", 'i')
-        'Vimeo': new RegExp("https?://(?:www\\.)?vimeo\\.com/(?:album/\\w+/video/|groups/\\w+/videos/)?\\w+/?", 'i')
+        'Vimeo': new RegExp("https?://(?:www\\.)?vimeo\\.com/(?:album/\\w+/video/|groups/\\w+/videos/)?\\w+", 'i')
         'Slideshare': new RegExp("https?://(?:www\\.)?slideshare\\.net/[\\w\\-]+/[\\w\\-]+", 'i')
-        'Youtube': new RegExp("https?://(?:www\\.)?(?:youtube\\.com/watch\\?v=|youtu\\.be/)[\\w-]+/?", 'i')
+        'Youtube': new RegExp("https?://(?:www\\.)?(?:youtube\\.com/watch\\?v=|youtu\\.be/)[\\w-]+", 'i')
     }
     providers_cached: null
     providers_cached_reg_exp: null

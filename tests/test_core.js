@@ -121,5 +121,12 @@ buster.testCase("oembed_images", {
       return buster.assert.equals(obj.get_thumbnail_url(55)[1], 480);
     });
     return buster.assert.equals(result, true);
+  },
+  'youtube_bug': function() {
+    var result;
+    result = media_parser.parse('This http://www.youtube.com/watch?v=9bZkp7q19f0/ Test', function(obj) {
+      return buster.assert.equals(obj.get_thumbnail_url(55)[1], 480);
+    });
+    return buster.assert.equals(result, true);
   }
 });

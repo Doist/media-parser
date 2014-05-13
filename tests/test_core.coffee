@@ -107,3 +107,9 @@ buster.testCase "oembed_images",
             buster.assert.equals(obj.get_thumbnail_url(55)[1], 480)
         )
         buster.assert.equals(result, true)
+
+    'youtube_bug': ->
+        result = media_parser.parse('This http://www.youtube.com/watch?v=9bZkp7q19f0/ Test', (obj) ->
+            buster.assert.equals(obj.get_thumbnail_url(55)[1], 480)
+        )
+        buster.assert.equals(result, true)
