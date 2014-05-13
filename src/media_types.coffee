@@ -76,7 +76,7 @@ MediaTypes = {
             else
                 callback(result)
 
-        cb_error = (json) ->
+        cb_error = (json, err) ->
             callback(null)
 
         MediaParser.http_service.oembedRequest(req_url, cb_ok, cb_error,

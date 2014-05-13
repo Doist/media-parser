@@ -2,16 +2,20 @@ NodeHttpService = {
 
     oembedRequest: (url, callback_ok, callback_error,
                     content_url, timeout) ->
-        request = require("request")
+        needle = require("needle")
         timeout = timeout or 5000
-        args = {"url": url, "timeout": timeout}
+        args = {"timeout": timeout}
 
-        request(args, (error, response, body) ->
-            if error
+        needle.get(url, args, (error, response) ->
+            if error or response.statusCode != 200
                 callback_error(error)
             else
                 try
-                    json = JSON.parse(body)
+                    body = response.body
+                    if typeof(body) == 'string'
+                        json = JSON.parse(body)
+                    else
+                        json = body
                     callback_ok(json)
                 catch e
                     callback_error('Unknown error happened')
